@@ -1,5 +1,9 @@
+from utils.functions import sanitize
+from sanitizers.CoefficientCountSanitizer import CoefficientCountSanitizer
+
+
 def main():
-    pass
+    sanitize([2, 3, 4], CoefficientCountSanitizer, 4)
 
 
 if __name__ == "__main__":
