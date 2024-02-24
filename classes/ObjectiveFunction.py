@@ -1,0 +1,2 @@
+class ObjectiveFunction:
+    pass
