@@ -1,6 +1,6 @@
-from ObjectiveFunction import ObjectiveFunction
-from SimplexAnswer import SimplexAnswer
-from ConstraintCollection import ConstraintCollection
+from classes.ObjectiveFunction import ObjectiveFunction
+from classes.SimplexAnswer import SimplexAnswer
+from classes.ConstraintCollection import ConstraintCollection
 
 
 class SimplexProblem:
