@@ -3,6 +3,13 @@
 ## Architecture
 
 ```mermaid
-classDiagram
-    Animal <|-- Duck
+stateDiagram-v2
+    [*] --> SimplexProblem
+    [*] --> GomoryCut
+    SimplexProblem --> DualSimplexProblem
+    SimplexProblem --> TwoPhaseSimplexProblem
+    SimplexProblem --> SimplexAnswer
+    GomoryCut --> TwoPhaseSimplexProblem
+    TwoPhaseSimplexProblem --> SimplexAnswer
+    DualSimplexProblem --> SimplexAnswer
 ```
