@@ -1,12 +1,17 @@
 from classes.Table import Table
 from utils.functions import sanitize
+from enums.Objectives import Objectives
+from classes.ObjectiveFunction import ObjectiveFunction
+from classes.ConstraintBag import ConstraintBag
 
 
 def main():
-    a = sanitize("CoefficientCount", data=[1, 2, 3, 4], correct_count=3)
-    print(a)
-    table = Table([[1, 2], [3, 4]])
-    table.beautify()
+    objective = ObjectiveFunction(Objectives.Max, 2, 1)
+
+    constraints = ConstraintBag()
+    constraints.add(3, 4)
+
+    print(constraints)
 
 
 if __name__ == "__main__":

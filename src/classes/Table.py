@@ -5,12 +5,13 @@ from utils.functions import log
 
 
 class Table:
-    def __init__(self, initial: list) -> None:
-        self.value = np.array(initial)
-        self.shape = self.value.shape
+    def __init__(self, initial: list | None) -> None:
+        if bool(initial):
+            self.value = np.array(initial)
+            self.shape = self.value.shape
 
-        if self.value.ndim != 2:
-            raise InvalidTableDimensionException
+            if self.value.ndim != 2:
+                raise InvalidTableDimensionException
 
     def row(self, index: int):
         """
@@ -62,11 +63,32 @@ class Table:
         """
         self.value[index, :] = new
 
+    def add_row(self, new: list):
+        """
+        The `add_row` function appends a new row to a numpy array.
+
+        :param new: The `add_row` method you provided seems to be adding a new row to a numpy array
+        `self.value` using `np.vstack`. The `new` parameter is expected to be a list representing the new
+        row that you want to add to the existing array
+        :type new: list
+        """
+        self.value = np.vstack([self.value, new])
+
+    def add_col(self, new: list):
+        """
+        The `add_col` function appends a new list as a column to an existing numpy array.
+
+        :param new: The `new` parameter in the `add_col` method is expected to be a list that contains the
+        values you want to add as a new column to the existing data in the `self.value` attribute
+        :type new: list
+        """
+        self.value = np.hstack([self.value, new])
+
     def beautify(self, delimiter="\t"):
         """
         The `beautify` function in Python prints the values of a matrix with a specified delimiter between
         elements.
-        
+
         :param delimiter: The `delimiter` parameter in the `beautify` method is used to specify the
         character or string that will be used to separate the values when they are printed. By default, the
         delimiter is set to a tab character ("\t"), but you can provide a different delimiter if needed,

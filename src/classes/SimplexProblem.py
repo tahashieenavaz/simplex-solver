@@ -1,6 +1,6 @@
 from classes.ObjectiveFunction import ObjectiveFunction
 from classes.SimplexAnswer import SimplexAnswer
-from classes.ConstraintCollection import ConstraintCollection
+from src.classes.ConstraintBag import ConstraintCollection
 from errors.NoAnswerException import NoAnswerException
 
 
