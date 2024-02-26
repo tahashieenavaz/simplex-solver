@@ -94,7 +94,7 @@ class Table:
         if self.void():
             self.value = np.array(new)
         else:
-            self.value = np.vstack([self.value, new])
+            self.value = np.insert(self.value, -1, new, axis=0)
 
     def add_col(self, new: list):
         """
@@ -108,7 +108,7 @@ class Table:
         if self.void():
             self.value = np.array(new)
         else:
-            self.value = np.hstack([self.value, new])
+            self.value = np.insert(self.value, -1, new, axis=1)
 
     def beautify(self, delimiter="\t"):
         """
