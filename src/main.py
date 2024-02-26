@@ -3,6 +3,7 @@ from enums.Sign import Sign
 
 from classes.ObjectiveFunction import ObjectiveFunction
 from classes.ConstraintBag import ConstraintBag
+from classes.SimplexProblem import SimplexProblem
 
 
 def main():
@@ -12,7 +13,10 @@ def main():
     constraints.add(Sign.SE, 3, -2)
     constraints.add(Sign.SE, 1, 2)
 
-    print(constraints)
+    problem = SimplexProblem(objective, constraints)
+    problem.solve()
+
+    print(problem.answer())
 
 
 if __name__ == "__main__":
