@@ -14,12 +14,13 @@ class SimplexProblem:
 
         self.table = Table()
 
-        self.base_table()
+        self.baseTable()
         self.standardize()
 
-    def base_table(self):
+    def baseTable(self):
         if self.objective.isMax():
-            objective_function_coefficients = list(map(lambda x: -x, self.objective.coeffs))
+            objective_function_coefficients = list(
+                map(lambda x: -x, self.objective.coeffs))
         else:
             objective_function_coefficients = self.objective.coeffs
 
@@ -27,6 +28,12 @@ class SimplexProblem:
 
         for constraint in self.constraints.bag:
             self.table.add_row(constraint.coeffs)
+
+    def isOptimal(self):
+        return all(item > 0 for item in self.table.row(0))
+
+    def isNotOptimal(self):
+        return not self.isOptimal()
 
     def standardize(self):
         for index, constraint in enumerate(self.constraints.bag):
@@ -40,6 +47,7 @@ class SimplexProblem:
             self.table.add_col(new_column)
 
     def solve(self) -> None:
-        # TODO: complete
+        while (self.isNotOptimal()):
+            self.findPivot()
 
         self.isSolved = True
