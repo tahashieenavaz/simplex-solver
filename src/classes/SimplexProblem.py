@@ -1,11 +1,10 @@
 from classes.ObjectiveFunction import ObjectiveFunction
-from classes.SimplexAnswer import SimplexAnswer
-from src.classes.ConstraintBag import ConstraintCollection
+from src.classes.ConstraintBag import ConstraintBag
 from errors.NoAnswerException import NoAnswerException
 
 
 class SimplexProblem:
-    def __init__(self, objective_function: ObjectiveFunction, constraints: ConstraintCollection):
+    def __init__(self, objective_function: ObjectiveFunction, constraints: ConstraintBag):
         self.objective_function = objective_function
         self.constraints = constraints
         self.isSolved = False
