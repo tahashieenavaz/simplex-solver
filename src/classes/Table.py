@@ -1,7 +1,8 @@
 import numpy as np
+from tabulate import tabulate
+
 from errors.InvalidTableDimensionException import InvalidTableDimensionException
-from utils.functions import newline
-from utils.functions import log
+from utils.functions import header_generator
 
 
 class Table:
@@ -96,7 +97,7 @@ class Table:
         else:
             self.value = np.vstack([self.value, new])
 
-    def add_col(self, new: list):
+    def add_col(self, new: list, index=None):
         """
         The `add_col` function appends a new list as a column to an existing numpy array.
 
@@ -107,22 +108,15 @@ class Table:
         if self.void():
             self.value = np.array(new)
         else:
-            self.value = np.insert(self.value, self.cols(), new, axis=1)
+            if index is None:
+                index = self.cols()
+
+            self.value = np.insert(self.value, index, new, axis=1)
 
     def beautify(self, delimiter="\t"):
-        """
-        The `beautify` function in Python prints the values of a matrix with a specified delimiter between
-        elements.
-
-        :param delimiter: The `delimiter` parameter in the `beautify` method is used to specify the
-        character or string that will be used to separate the values when they are printed. By default, the
-        delimiter is set to a tab character ("\t"), but you can provide a different delimiter if needed,
-        defaults to \t (optional)
-        """
-        rows, cols = self.shape()
-
-        for i in range(rows):
-            for p in range(cols):
-                log(f"{self.value[i][p]}{delimiter}")
-
-            newline()
+        print(tabulate(
+            self.value,
+            tablefmt="fancy_grid",
+            showindex=header_generator(self.rows()),
+            headers=header_generator(self.cols())
+        ))
