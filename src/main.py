@@ -1,5 +1,5 @@
-from enums.Objectives import Objectives
-from enums.Sign import Sign
+from utils.enums import Objectives
+from utils.enums import Sign
 
 from classes.ObjectiveFunction import ObjectiveFunction
 from classes.ConstraintBag import ConstraintBag
