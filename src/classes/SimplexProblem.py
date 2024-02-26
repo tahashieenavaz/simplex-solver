@@ -4,7 +4,7 @@ from classes.Table import Table
 
 from collections import Counter
 
-from enums.Sign import Sign
+from utils.enums import Sign
 
 from errors.NoAnswerException import NoAnswerException
 from errors.NoBaseCalculatedException import NoBaseCalculatedException

@@ -1,5 +1,5 @@
 from classes.Constraint import Constraint
-from enums.Sign import Sign
+from utils.enums import Sign
 
 
 class ConstraintBag:

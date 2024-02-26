@@ -1,4 +1,4 @@
-from enums.Sign import Sign
+from utils.enums import Sign
 
 
 class Constraint:

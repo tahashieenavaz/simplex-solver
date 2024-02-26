@@ -1,4 +1,4 @@
-from enums.Objectives import Objectives
+from utils.enums import Objectives
 
 
 class ObjectiveFunction:
