@@ -1,2 +1,6 @@
-def sanitize(input: any, sanitizer_class, *args) -> bool:
-    return sanitizer_class(args).sanitize(input)
+from sanitizers.Sanitizer import Sanitizer
+
+
+def sanitize(sanitizer_class: Sanitizer, **kwargs) -> bool:
+    instance = sanitizer_class(**kwargs)
+    return instance.sanitize()

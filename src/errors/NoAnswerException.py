@@ -1,0 +1,2 @@
+class NoAnswerException(Exception):
+    pass

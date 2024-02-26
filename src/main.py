@@ -3,7 +3,8 @@ from sanitizers.CoefficientCountSanitizer import CoefficientCountSanitizer
 
 
 def main():
-    sanitize([2, 3, 4], CoefficientCountSanitizer, 4)
+    print(sanitize(CoefficientCountSanitizer,
+          correct_count=4, data=[2, 3, 4, 5, 22]))
 
 
 if __name__ == "__main__":
