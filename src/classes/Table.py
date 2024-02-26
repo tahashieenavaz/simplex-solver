@@ -17,6 +17,12 @@ class Table:
     def shape(self):
         return self.value.shape
 
+    def rows(self):
+        return self.shape()[0]
+
+    def cols(self):
+        return self.shape()[1]
+
     def void(self):
         """
         The function `void` checks if the shape of `self.value` is empty and if its length is 1.

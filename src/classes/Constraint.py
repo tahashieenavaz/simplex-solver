@@ -2,6 +2,6 @@ from enums.Sign import Sign
 
 
 class Constraint:
-    def __init__(self, sign: Sign, coefficients: list):
+    def __init__(self, sign: Sign, coeffs: list):
         self.sign = sign
-        self.coefficients = coefficients
+        self.coeffs = coeffs
