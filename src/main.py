@@ -16,7 +16,7 @@ def main():
     problem = SimplexProblem(objective, constraints)
     problem.solve()
 
-    problem.table.beautify()
+    problem.table.beautify(indexlist=problem.getBaseRepresentation())
 
 
 if __name__ == "__main__":

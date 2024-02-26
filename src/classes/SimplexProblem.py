@@ -1,8 +1,15 @@
 from classes.ObjectiveFunction import ObjectiveFunction
 from classes.ConstraintBag import ConstraintBag
 from classes.Table import Table
+
+from collections import Counter
+
 from enums.Sign import Sign
+
 from errors.NoAnswerException import NoAnswerException
+from errors.NoBaseCalculatedException import NoBaseCalculatedException
+
+from utils.functions import subscript
 
 
 class SimplexProblem:
@@ -12,10 +19,31 @@ class SimplexProblem:
         self.isSolved = False
         self.answer = None
 
+        self.base = []
         self.table = Table()
 
         self.baseTable()
         self.standardize()
+        self.formFirstBase()
+        print(self.base)
+
+    def getBaseRepresentation(self):
+        return list(map(lambda x: subscript(x), self.base))
+
+    def formFirstBase(self):
+        # TODO: check if the number of basis matches the number of constraints, if not go for two phase
+
+        for index, column in enumerate(self.table.value.T):
+            countedElements = Counter(column)
+
+            checkIfOnlyZeroAndOneExistInColoumn = list(
+                countedElements.keys()) == [0, 1]
+            checkIfNumberOfOnesIsOne = countedElements[1] == 1
+            checkIfNumberOfZerosMatch = countedElements[0] == self.table.rows(
+            ) - 1
+
+            if checkIfOnlyZeroAndOneExistInColoumn and checkIfNumberOfOnesIsOne and checkIfNumberOfZerosMatch:
+                self.base.append(index)
 
     def baseTable(self):
         first_column = [0]

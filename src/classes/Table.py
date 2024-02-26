@@ -113,10 +113,11 @@ class Table:
 
             self.value = np.insert(self.value, index, new, axis=1)
 
-    def beautify(self, delimiter="\t"):
+    def beautify(self, indexlist=[], delimiter="\t"):
+        indexlist.insert(0, "-z")
         print(tabulate(
             self.value,
             tablefmt="fancy_grid",
-            showindex=header_generator(self.rows(), True),
+            showindex=indexlist,
             headers=header_generator(self.cols())
         ))

@@ -39,5 +39,25 @@ def log(message: str):
     print(message, end="")
 
 
-def header_generator(count, row = False):
-    return ["-z" if row else "", "x₁", "x₂", "x₃", "x₄", "x₅", "x₆", "x₇", "x₈", "x₉", "x₁₀"][0:count]
+def header_generator(count):
+    return ["", "x₁", "x₂", "x₃", "x₄", "x₅", "x₆", "x₇", "x₈", "x₉", "x₁₀"][0:count]
+
+
+def subscript(number=0):
+    final = "x"
+    subscriptMap = {
+        "0": "₀",
+        "1": "₁",
+        "2": "₂",
+        "3": "₃",
+        "4": "₄",
+        "5": "₅",
+        "6": "₆",
+        "7": "₇",
+        "8": "₈",
+        "9": "₉",
+    }
+    for digit in str(number):
+        final += subscriptMap[digit]
+
+    return final
