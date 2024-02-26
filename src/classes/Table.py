@@ -94,7 +94,7 @@ class Table:
         if self.void():
             self.value = np.array(new)
         else:
-            self.value = np.insert(self.value, -1, new, axis=0)
+            self.value = np.vstack([self.value, new])
 
     def add_col(self, new: list):
         """
@@ -104,11 +104,10 @@ class Table:
         values you want to add as a new column to the existing data in the `self.value` attribute
         :type new: list
         """
-
         if self.void():
             self.value = np.array(new)
         else:
-            self.value = np.insert(self.value, -1, new, axis=1)
+            self.value = np.insert(self.value, self.cols(), new, axis=1)
 
     def beautify(self, delimiter="\t"):
         """

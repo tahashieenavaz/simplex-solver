@@ -18,7 +18,11 @@ class SimplexProblem:
         self.standardize()
 
     def base_table(self):
-        self.table.add_row(self.objective.coeffs)
+        if self.objective.isMax():
+            new_coefficients = list(map(lambda x: -x, self.objective.coeffs))
+            self.table.add_row(new_coefficients)
+        else:
+            self.table.add_row(self.objective.coeffs)
 
         for constraint in self.constraints.bag:
             self.table.add_row(constraint.coeffs)
@@ -26,7 +30,6 @@ class SimplexProblem:
     def standardize(self):
         for index, constraint in enumerate(self.constraints.bag):
             new_column = [0] * self.table.rows()
-            print(new_column)
 
             if constraint.sign == Sign.GreaterEqual:
                 new_column[index + 1] = -1
