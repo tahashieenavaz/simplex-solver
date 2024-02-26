@@ -5,13 +5,26 @@ from utils.functions import log
 
 
 class Table:
-    def __init__(self, initial: list | None) -> None:
+    def __init__(self, initial: list | None = None) -> None:
         if bool(initial):
             self.value = np.array(initial)
-            self.shape = self.value.shape
 
             if self.value.ndim != 2:
                 raise InvalidTableDimensionException
+        else:
+            self.value = np.array([])
+
+    def shape(self):
+        return self.value.shape
+
+    def void(self):
+        """
+        The function `void` checks if the shape of `self.value` is empty and if its length is 1.
+        :return: The code snippet is checking if the shape of the `value` attribute is empty (has 0
+        elements) and if the length of the `value` attribute is 1. If both conditions are true, then it
+        returns `True`, otherwise it returns `False`.
+        """
+        return self.value.shape[0] == 0 and len(self.value.shape) == 1
 
     def row(self, index: int):
         """
@@ -72,7 +85,10 @@ class Table:
         row that you want to add to the existing array
         :type new: list
         """
-        self.value = np.vstack([self.value, new])
+        if self.void():
+            self.value = np.array(new)
+        else:
+            self.value = np.vstack([self.value, new])
 
     def add_col(self, new: list):
         """
@@ -82,7 +98,11 @@ class Table:
         values you want to add as a new column to the existing data in the `self.value` attribute
         :type new: list
         """
-        self.value = np.hstack([self.value, new])
+
+        if self.void():
+            self.value = np.array(new)
+        else:
+            self.value = np.hstack([self.value, new])
 
     def beautify(self, delimiter="\t"):
         """
@@ -94,7 +114,7 @@ class Table:
         delimiter is set to a tab character ("\t"), but you can provide a different delimiter if needed,
         defaults to \t (optional)
         """
-        rows, cols = self.shape
+        rows, cols = self.shape()
 
         for i in range(rows):
             for p in range(cols):

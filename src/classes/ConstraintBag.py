@@ -6,4 +6,4 @@ class ConstraintBag:
         self.value = Table()
 
     def add(self, *args):
-        self.value.add_row(*args)
+        self.value.add_row(args)
