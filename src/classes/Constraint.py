@@ -1,6 +1,7 @@
-from enums.Signature import Signature
+from src.enums.Sign import Sign
 
 
 class Constraint:
-    def __init__(self, coefficients: list, sign: Signature):
-        pass
+    def __init__(self, sign: Sign, coefficients: list):
+        self.sign = sign
+        self.coefficients = coefficients

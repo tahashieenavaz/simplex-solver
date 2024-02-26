@@ -1,9 +1,10 @@
-from classes.Table import Table
+from classes.Constraint import Constraint
+from enums.Sign import Sign
 
 
 class ConstraintBag:
     def __init__(self) -> None:
-        self.value = Table()
+        self.bag = []
 
-    def add(self, *args):
-        self.value.add_row(args)
+    def add(self, sign: Sign, *args):
+        self.bag.append(Constraint(sign, args))
