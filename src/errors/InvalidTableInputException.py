@@ -1,2 +1,0 @@
-class InvalidTableInputException(Exception):
-    pass
