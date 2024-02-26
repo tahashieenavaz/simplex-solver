@@ -1,10 +1,8 @@
-from utils.functions import sanitize
-from sanitizers.CoefficientCountSanitizer import CoefficientCountSanitizer
+from classes.Table import Table
 
 
 def main():
-    print(sanitize(CoefficientCountSanitizer,
-          correct_count=4, data=[2, 3, 4, 5, 22  ]))
+    table = Table([12, 12, 12,])
 
 
 if __name__ == "__main__":

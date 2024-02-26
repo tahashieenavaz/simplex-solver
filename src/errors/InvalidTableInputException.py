@@ -1,2 +1,2 @@
-class InvalidTableException(Exception):
+class InvalidTableInputException(Exception):
     pass
