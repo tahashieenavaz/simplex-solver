@@ -115,6 +115,7 @@ class Table:
 
     def beautify(self, indexlist=[], delimiter="\t"):
         indexlist.insert(0, "-z")
+
         print(tabulate(
             self.value,
             tablefmt="fancy_grid",
