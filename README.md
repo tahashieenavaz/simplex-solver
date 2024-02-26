@@ -1,1 +1,8 @@
-# simplex-solver
+# Simplex Solver
+
+## Architecture
+
+```mermaid
+classDiagram
+    Animal <|-- Duck
+```
