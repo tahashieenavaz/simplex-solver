@@ -1,6 +1,7 @@
 import numpy as np
 from errors.InvalidTableDimensionException import InvalidTableDimensionException
 from utils.functions import newline
+from utils.functions import log
 
 
 class Table:
@@ -75,6 +76,6 @@ class Table:
 
         for i in range(rows):
             for p in range(cols):
-                print(f"{self.value[i][p]}{delimiter}", end="")
+                log(f"{self.value[i][p]}{delimiter}")
 
             newline()
