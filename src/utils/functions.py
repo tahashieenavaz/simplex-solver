@@ -39,5 +39,5 @@ def log(message: str):
     print(message, end="")
 
 
-def header_generator(count):
-    return ["", "x₁", "x₂", "x₃", "x₄", "x₅", "x₆", "x₇", "x₈", "x₉", "x₁₀"][0:count]
+def header_generator(count, row = False):
+    return ["-z" if row else "", "x₁", "x₂", "x₃", "x₄", "x₅", "x₆", "x₇", "x₈", "x₉", "x₁₀"][0:count]

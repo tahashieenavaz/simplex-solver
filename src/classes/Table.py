@@ -117,6 +117,6 @@ class Table:
         print(tabulate(
             self.value,
             tablefmt="fancy_grid",
-            showindex=header_generator(self.rows()),
+            showindex=header_generator(self.rows(), True),
             headers=header_generator(self.cols())
         ))
