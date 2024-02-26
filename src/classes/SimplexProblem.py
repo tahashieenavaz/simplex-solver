@@ -25,13 +25,12 @@ class SimplexProblem:
         self.baseTable()
         self.standardize()
         self.formFirstBase()
-        print(self.base)
 
     def getBaseRepresentation(self):
         return list(map(lambda x: subscript(x), self.base))
 
     def beautify(self):
-        self.table.beautify(indexlist=self.getBaseRepresentation()) 
+        self.table.beautify(indexlist=self.getBaseRepresentation())
 
     def formFirstBase(self):
         # TODO: check if the number of basis matches the number of constraints, if not go for two phase
