@@ -19,10 +19,11 @@ class SimplexProblem:
 
     def base_table(self):
         if self.objective.isMax():
-            new_coefficients = list(map(lambda x: -x, self.objective.coeffs))
-            self.table.add_row(new_coefficients)
+            objective_function_coefficients = list(map(lambda x: -x, self.objective.coeffs))
         else:
-            self.table.add_row(self.objective.coeffs)
+            objective_function_coefficients = self.objective.coeffs
+
+        self.table.add_row(objective_function_coefficients)
 
         for constraint in self.constraints.bag:
             self.table.add_row(constraint.coeffs)
