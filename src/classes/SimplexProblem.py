@@ -31,10 +31,10 @@ class SimplexProblem:
     def getBaseRepresentation(self):
         return list(map(lambda x: subscript(x), self.base))
 
-    def beautify(self):
+    def beautify(self) -> None:
         self.table.beautify(indexlist=self.getBaseRepresentation())
 
-    def formFirstBase(self):
+    def formFirstBase(self) -> None:
         # TODO: check if the number of basis matches the number of constraints, if not go for two phase
 
         for index, column in enumerate(self.table.value.T):
@@ -49,7 +49,7 @@ class SimplexProblem:
             if checkIfOnlyZeroAndOneExistInColoumn and checkIfNumberOfOnesIsOne and checkIfNumberOfZerosMatch:
                 self.base.append(index)
 
-    def baseTable(self):
+    def baseTable(self) -> None:
         first_column = [0]
 
         if self.objective.isMax():
@@ -66,13 +66,13 @@ class SimplexProblem:
 
         self.table.add_col(first_column, 0)
 
-    def isOptimal(self):
+    def isOptimal(self) -> bool:
         return all(item > 0 for item in self.table.row(0))
 
-    def isNotOptimal(self):
+    def isNotOptimal(self) -> bool:
         return not self.isOptimal()
 
-    def standardize(self):
+    def standardize(self) -> None:
         for index, constraint in enumerate(self.constraints.bag):
             new_column = [0] * self.table.rows()
 
