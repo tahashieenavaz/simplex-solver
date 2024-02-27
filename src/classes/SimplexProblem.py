@@ -50,6 +50,10 @@ class SimplexProblem:
                 self.base.append(index)
 
     def baseTable(self) -> None:
+        """
+        The function `baseTable` constructs a table with objective function coefficients and constraint
+        coefficients along with their corresponding right-hand side values.
+        """
         first_column = [0]
 
         if self.objective.isMax():
@@ -67,9 +71,21 @@ class SimplexProblem:
         self.table.add_col(first_column, 0)
 
     def isOptimal(self) -> bool:
+        """
+        The function `isOptimal` checks if all items in the first row of a table are greater than 0.
+        :return: The `isOptimal` method is returning a boolean value. It checks if all items in the first
+        row of the table are greater than 0, and returns `True` if this condition is met for all items,
+        otherwise it returns `False`.
+        """
         return all(item > 0 for item in self.table.row(0))
 
     def isNotOptimal(self) -> bool:
+        """
+        The function `isNotOptimal` returns the opposite boolean value of the function `isOptimal`.
+        :return: The `isNotOptimal` method is returning the opposite of the result of the `isOptimal`
+        method. If `self.isOptimal()` returns `True`, then `isNotOptimal` will return `False`. If
+        `self.isOptimal()` returns `False`, then `isNotOptimal` will return `True`.
+        """
         return not self.isOptimal()
 
     def standardize(self) -> None:
