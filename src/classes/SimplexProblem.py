@@ -87,6 +87,9 @@ class SimplexProblem:
         return not self.isOptimal()
 
     def standardize(self) -> None:
+        """
+        The `standardize` function adds a new column to a table based on the sign of a constraint.
+        """
         for index, constraint in enumerate(self.constraints.bag):
             new_column = [0] * self.table.rows()
 
