@@ -44,6 +44,16 @@ def header_generator(count):
 
 
 def subscript(number=0):
+    """
+    The function `subscript` converts a given number into subscript format using Unicode characters.
+
+    :param number: The `subscript` function takes a number as input and converts each digit of the
+    number into a subscript equivalent. For example, if you pass the number 123, it will return "x₁₂₃",
+    defaults to 0 (optional)
+    :return: The `subscript` function takes a number as input (default is 0) and converts each digit in
+    the number to its subscript equivalent. For example, if the input number is 123, the function will
+    return "x₁₂₃".
+    """
     final = "x"
     subscriptMap = {
         "0": "₀",
@@ -66,7 +76,7 @@ def subscript(number=0):
 def panicIf(condition, exception=Exception):
     """
     The function `panicIf` raises an exception if a specified condition is met.
-    
+
     :param condition: The `condition` parameter is a boolean expression that is evaluated. If the
     condition is `True`, the function will raise an exception based on the `exception` parameter
     :param exception: The `exception` parameter in the `panicIf` function is the type of exception that
@@ -80,7 +90,7 @@ def panicIf(condition, exception=Exception):
 def panicIfNot(condition, exception=Exception):
     """
     The function `panicIfNot` raises an exception if a specified condition is not met.
-    
+
     :param condition: The `condition` parameter is a boolean expression that is evaluated. If the
     condition evaluates to `False`, the function will raise an exception
     :param exception: The `exception` parameter in the `panicIfNot` function is a placeholder for the

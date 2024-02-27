@@ -1,6 +1,7 @@
 from classes.ObjectiveFunction import ObjectiveFunction
 from classes.ConstraintBag import ConstraintBag
 from classes.PivotElement import PivotElement
+from classes.Basis import Basis
 from classes.Table import Table
 
 from collections import Counter
@@ -21,18 +22,15 @@ class SimplexProblem:
         self.isSolved = False
         self.answer = None
 
-        self.base = []
+        self.basis = Basis()
         self.table = Table()
 
         self.baseTable()
         self.standardize()
         self.formFirstBase()
 
-    def getBaseRepresentation(self):
-        return list(map(lambda x: subscript(x), self.base))
-
     def beautify(self) -> None:
-        self.table.beautify(indexlist=self.getBaseRepresentation())
+        self.table.beautify(indexlist=self.basis.representation())
 
     def formFirstBase(self) -> None:
         # TODO: check if the number of basis matches the number of constraints, if not go for two phase
@@ -47,7 +45,7 @@ class SimplexProblem:
             ) - 1
 
             if checkIfOnlyZeroAndOneExistInColoumn and checkIfNumberOfOnesIsOne and checkIfNumberOfZerosMatch:
-                self.base.append(index)
+                self.basis.add(index)
 
     def baseTable(self) -> None:
         """
@@ -101,6 +99,7 @@ class SimplexProblem:
 
     def solve(self) -> None:
         pivot = PivotElement()
+
         while self.isNotOptimal():
             for i in range(1, self.table.cols()):
                 if self.table.row(0)[i] < 0:
@@ -116,6 +115,12 @@ class SimplexProblem:
                 pivot.setRow(index, theta, element)
 
             panicIfNot(pivot.isValid())
-            # DO linear operations
+
+            self.basis.swap(
+                self.basis.variables[pivot.row],
+                pivot.col
+            )
+
+            # DO Linear Operations
 
         self.isSolved = True
