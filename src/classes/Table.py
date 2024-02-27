@@ -16,12 +16,25 @@ class Table:
             self.value = np.array([])
 
     def shape(self):
+        """
+        The `shape` function returns the shape of the `value` attribute.
+        :return: The `shape` attribute of the `value` object is being returned.
+        """
         return self.value.shape
 
     def rows(self):
+        """
+        This function returns the number of rows in a matrix.
+        :return: The `rows` method is returning the number of rows in the data structure, which is obtained
+        by calling the `shape` method and accessing the first element of the returned tuple.
+        """
         return self.shape()[0]
 
     def cols(self):
+        """
+        The `cols` function returns the number of columns in the shape of the object.
+        :return: The `cols` method is returning the number of columns in the shape of the object.
+        """
         return self.shape()[1]
 
     def void(self):
@@ -32,6 +45,13 @@ class Table:
         returns `True`, otherwise it returns `False`.
         """
         return self.value.shape[0] == 0 and len(self.value.shape) == 1
+
+    def transpose(self):
+        """
+        The `transpose` function returns the transpose of the `value` attribute of the object.
+        :return: The code is returning the transpose of the `value` attribute of the object.
+        """
+        return self.value.T
 
     def row(self, index: int):
         """

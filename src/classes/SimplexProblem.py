@@ -1,5 +1,6 @@
 from classes.ObjectiveFunction import ObjectiveFunction
 from classes.ConstraintBag import ConstraintBag
+from classes.PivotElement import PivotElement
 from classes.Table import Table
 
 from collections import Counter
@@ -10,6 +11,7 @@ from errors.NoAnswerException import NoAnswerException
 from errors.NoBaseCalculatedException import NoBaseCalculatedException
 
 from utils.functions import subscript
+from utils.functions import panicIfNot
 
 
 class SimplexProblem:
@@ -82,6 +84,22 @@ class SimplexProblem:
             self.table.add_col(new_column)
 
     def solve(self) -> None:
-        # TODO: complete
+        pivot = PivotElement()
+        while self.isNotOptimal():
+            for i in range(1, self.table.cols()):
+                if self.table.row(0)[i] < 0:
+                    pivot.setCol(i)
+                    break
+            panicIfNot(pivot.isColValid())
+
+            for index, element in enumerate(self.table.transpose()[pivot.col]):
+                if element <= 0:
+                    continue
+
+                theta = self.table.col(0)[index] / element
+                pivot.setRow(index, theta, element)
+
+            panicIfNot(pivot.isValid())
+            # DO linear operations
 
         self.isSolved = True

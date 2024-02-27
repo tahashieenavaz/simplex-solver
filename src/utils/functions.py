@@ -61,3 +61,31 @@ def subscript(number=0):
         final += subscriptMap[digit]
 
     return final
+
+
+def panicIf(condition, exception=Exception):
+    """
+    The function `panicIf` raises an exception if a specified condition is met.
+    
+    :param condition: The `condition` parameter is a boolean expression that is evaluated. If the
+    condition is `True`, the function will raise an exception based on the `exception` parameter
+    :param exception: The `exception` parameter in the `panicIf` function is the type of exception that
+    will be raised if the `condition` evaluates to `True`. By default, it is set to `Exception`, but you
+    can provide a different exception type when calling the function if needed
+    """
+    if condition:
+        raise exception
+
+
+def panicIfNot(condition, exception=Exception):
+    """
+    The function `panicIfNot` raises an exception if a specified condition is not met.
+    
+    :param condition: The `condition` parameter is a boolean expression that is evaluated. If the
+    condition evaluates to `False`, the function will raise an exception
+    :param exception: The `exception` parameter in the `panicIfNot` function is a placeholder for the
+    type of exception that will be raised if the `condition` is not met. By default, it is set to
+    `Exception`, which is a built-in base class for all exceptions in Python. You can customize
+    """
+    if not condition:
+        raise exception
