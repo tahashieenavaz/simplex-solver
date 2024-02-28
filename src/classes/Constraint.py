@@ -10,3 +10,6 @@ class Constraint:
         self.sign = sign
         self.rhb = fraction(rhb)
         self.coeffs = Map(coeffs).using(fraction)
+
+    def row(self):
+        return [self.rhb, *self.coeffs]

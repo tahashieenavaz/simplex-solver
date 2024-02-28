@@ -3,6 +3,7 @@ from classes.ConstraintBag import ConstraintBag
 from classes.PivotElement import PivotElement
 from classes.Basis import Basis
 from classes.Table import Table
+from classes.SimplexAnswer import SimplexAnswer
 from classes.Collection import Map
 
 from collections import Counter
@@ -15,17 +16,18 @@ from utils.functions import fraction
 
 class SimplexProblem:
     def __init__(self, objective: ObjectiveFunction, constraints: ConstraintBag):
-        self.objective = objective
-        self.constraints = constraints
-        self.isSolved = False
-        self.answer = None
-
-        self.basis = Basis()
-        self.table = Table()
-
+        self.engine(objective, constraints)
         self.baseTable()
         self.standardize()
         self.formFirstBase()
+
+    def engine(self, objective: ObjectiveFunction, constraints: ConstraintBag):
+        self.objective = objective
+        self.constraints = constraints
+        self.isSolved = False
+        self.answer = SimplexAnswer()
+        self.basis = Basis()
+        self.table = Table()
 
     def beautify(self) -> None:
         self.table.beautify(indexlist=self.basis.representation())
@@ -88,6 +90,9 @@ class SimplexProblem:
         The `standardize` function adds a new column to a table based on the sign of a constraint.
         """
         for index, constraint in enumerate(self.constraints.bag):
+            if constraint.sign == Sign.Equal:
+                continue
+
             new_column = [fraction(0)] * self.table.rows()
 
             if constraint.sign == Sign.GreaterEqual:
@@ -138,4 +143,5 @@ class SimplexProblem:
 
             self.beautify()
 
+        self.answer.record(self.table)
         self.isSolved = True

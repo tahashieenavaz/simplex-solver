@@ -25,3 +25,10 @@ class ObjectiveFunction:
         attribute of the object is equal to `Objectives.Min`.
         """
         return self.objective == Objectives.Min
+
+    def variableCount(self):
+        """
+        This function returns the number of elements in the "coeffs" list of the object.
+        :return: The `variableCount` method is returning the length of the `coeffs` attribute of the object.
+        """
+        return len(self.coeffs)
