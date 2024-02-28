@@ -1,5 +1,5 @@
 class Map:
-    def __init__(self, target: list) -> None:
+    def __init__(self, target: list | map) -> None:
         self.target = target
 
     def using(self, callback) -> list:
