@@ -1,10 +1,14 @@
 from utils.enums import Objectives
 
+from classes.Collection import Map
+
+from utils.functions import fraction
+
 
 class ObjectiveFunction:
     def __init__(self, objective: Objectives, *args) -> None:
         self.objective = objective
-        self.coeffs = args
+        self.coeffs = Map(args).using(fraction).get()
 
     def isMax(self):
         """

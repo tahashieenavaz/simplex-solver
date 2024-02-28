@@ -1,4 +1,5 @@
 from utils.functions import subscript
+from classes.Collection import Map
 
 
 class Basis:
@@ -22,7 +23,7 @@ class Basis:
         :return: A list of elements obtained by applying the `subscript` function to each element in the
         `self.base` list.
         """
-        return list(map(lambda x: subscript(x), self.variables))
+        return Map(self.variables).using(subscript).get()
 
     def swap(self, leaving: int, entering: int) -> None:
         """

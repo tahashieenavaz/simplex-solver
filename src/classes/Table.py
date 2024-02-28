@@ -1,19 +1,22 @@
 import numpy as np
 from tabulate import tabulate
 
+from classes.Collection import Map
+
 from errors.InvalidTableDimensionException import InvalidTableDimensionException
 from utils.functions import header_generator
+from utils.functions import showFractionalIfNeeded
 
 
 class Table:
     def __init__(self, initial: list | None = None) -> None:
         if bool(initial):
-            self.value = np.array(initial)
+            self.value = np.array(initial, dtype=object)
 
             if self.value.ndim != 2:
                 raise InvalidTableDimensionException
         else:
-            self.value = np.array([])
+            self.value = np.array([], dtype=object)
 
     def shape(self):
         """
@@ -113,7 +116,7 @@ class Table:
         :type new: list
         """
         if self.void():
-            self.value = np.array(new)
+            self.value = np.array(new, dtype=object)
         else:
             self.value = np.vstack([self.value, new])
 
@@ -126,7 +129,7 @@ class Table:
         :type new: list
         """
         if self.void():
-            self.value = np.array(new)
+            self.value = np.array(new, dtype=np.float64)
         else:
             if index is None:
                 index = self.cols()
@@ -137,7 +140,8 @@ class Table:
         indexlist.insert(0, "-z")
 
         print(tabulate(
-            self.value,
+            np.vectorize(lambda x: showFractionalIfNeeded("/".join(Map(
+                x.as_integer_ratio()).using(str).get())))(self.value),
             tablefmt="fancy_grid",
             showindex=indexlist,
             headers=header_generator(self.cols())

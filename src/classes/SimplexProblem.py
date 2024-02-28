@@ -3,16 +3,14 @@ from classes.ConstraintBag import ConstraintBag
 from classes.PivotElement import PivotElement
 from classes.Basis import Basis
 from classes.Table import Table
+from classes.Collection import Map
 
 from collections import Counter
 
 from utils.enums import Sign
-
-from errors.NoAnswerException import NoAnswerException
-from errors.NoBaseCalculatedException import NoBaseCalculatedException
-
-from utils.functions import subscript
 from utils.functions import panicIfNot
+
+from utils.functions import fraction
 
 
 class SimplexProblem:
@@ -34,8 +32,7 @@ class SimplexProblem:
 
     def formFirstBase(self) -> None:
         # TODO: check if the number of basis matches the number of constraints, if not go for two phase
-
-        for index, column in enumerate(self.table.value.T):
+        for index, column in enumerate(self.table.transpose()):
             countedElements = Counter(column)
 
             checkIfOnlyZeroAndOneExistInColoumn = list(
@@ -52,11 +49,11 @@ class SimplexProblem:
         The function `baseTable` constructs a table with objective function coefficients and constraint
         coefficients along with their corresponding right-hand side values.
         """
-        first_column = [0]
+        first_column = [fraction(0)]
 
         if self.objective.isMax():
-            objective_function_coefficients = list(
-                map(lambda x: -x, self.objective.coeffs))
+            objective_function_coefficients = Map(
+                self.objective.coeffs).using(lambda x: fraction(-x)).get()
         else:
             objective_function_coefficients = self.objective.coeffs
 
@@ -75,7 +72,7 @@ class SimplexProblem:
         row of the table are greater than 0, and returns `True` if this condition is met for all items,
         otherwise it returns `False`.
         """
-        return all(item > 0 for item in self.table.row(0))
+        return all(item >= 0 for item in self.table.row(0))
 
     def isNotOptimal(self) -> bool:
         """
@@ -91,19 +88,20 @@ class SimplexProblem:
         The `standardize` function adds a new column to a table based on the sign of a constraint.
         """
         for index, constraint in enumerate(self.constraints.bag):
-            new_column = [0] * self.table.rows()
+            new_column = [fraction(0)] * self.table.rows()
 
             if constraint.sign == Sign.GreaterEqual:
-                new_column[index + 1] = -1
+                new_column[index + 1] = fraction(-1)
             elif constraint.sign == Sign.SmallerEqual:
-                new_column[index + 1] = 1
+                new_column[index + 1] = fraction(1)
 
             self.table.add_col(new_column)
 
     def solve(self) -> None:
-        pivot = PivotElement()
+        self.beautify()
 
         while self.isNotOptimal():
+            pivot = PivotElement()
             for i in range(1, self.table.cols()):
                 if self.table.row(0)[i] < 0:
                     pivot.setCol(i)
@@ -116,20 +114,28 @@ class SimplexProblem:
 
                 theta = self.table.col(0)[index] / element
                 pivot.setRow(index, theta, element)
-
             panicIfNot(pivot.isValid())
-            
-            self.beautify()
+
+            self.table.change_row(
+                pivot.row,
+                self.table.row(pivot.row) * (1 / pivot.value)
+            )
 
             self.basis.swap(
-                self.basis.variables[pivot.row],
+                self.basis.variables[pivot.row - 1],
                 pivot.col
             )
 
+            baseRowForLinearOperations = self.table.row(pivot.row)
+            for i in range(self.table.rows()):
+                if i == pivot.row:
+                    continue
+
+                rowForTheLinearOperation = baseRowForLinearOperations * \
+                    -1 * self.table.col(pivot.col)[i]
+                self.table.change_row(
+                    i, rowForTheLinearOperation + self.table.row(i))
+
             self.beautify()
-            break
-
-
-            # DO Linear Operations
 
         self.isSolved = True

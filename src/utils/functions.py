@@ -1,5 +1,49 @@
 import importlib
 from sanitizers.Sanitizer import Sanitizer
+from fractions import Fraction
+
+
+def showFractionalIfNeeded(number: str):
+    """
+    The function `showFractionalIfNeeded` removes the denominator if it is equal to 1 from a given
+    fractional number.
+    
+    :param number: The `showFractionalIfNeeded` function takes a string `number` as input and checks if
+    it ends with "/1". If it does, it returns the number without the "/1" suffix; otherwise, it returns
+    the original number
+    :type number: str
+    :return: The function `showFractionalIfNeeded` is returning the input `number` without the "/1"
+    suffix if the input ends with "/1". If the input does not end with "/1", the function returns the
+    input `number` as is.
+    """
+    if number.endswith("/1"):
+        return number.split("/1")[0]
+
+    return number
+
+
+def fraction(text: str | int):
+    """
+    The function `fraction` takes a string or integer input, converts it to a fraction format, and
+    returns a `Fraction` object.
+
+    :param text: The `fraction` function takes a parameter `text`, which can be either a string or an
+    integer. If `text` is an integer, it is converted to a string. If `text` does not contain a "/", it
+    appends "/1" to it. Then it splits the text at
+    :type text: str | int
+    :return: The code snippet provided defines a function `fraction` that takes a parameter `text` which
+    can be either a string or an integer. The function first checks if the input `text` is not a string,
+    it converts it to a string. Then, it checks if the string contains a "/", if not, it appends "/1" to
+    the string.
+    """
+    if not isinstance(text, str):
+        text = str(text)
+
+    if "/" not in text:
+        text += "/1"
+
+    numerator, denominator = text.split("/")
+    return Fraction(int(numerator), int(denominator))
 
 
 def sanitize(sanitizer_class: str, **kwargs) -> bool:
