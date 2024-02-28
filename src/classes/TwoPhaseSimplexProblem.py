@@ -16,6 +16,5 @@ class TwoPhaseSimplexProblem(SimplexProblem):
             newConstraints.add_col([0] * i + [1] + [0] * diffrence)
 
         self.engine(newObjectiveFunction, newConstraints)
-
         self.baseTable()
         self.formFirstBase()
