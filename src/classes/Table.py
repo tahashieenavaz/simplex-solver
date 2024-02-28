@@ -146,3 +146,6 @@ class Table:
             showindex=indexlist,
             headers=header_generator(self.cols())
         ))
+
+    def popColumn(self):
+        self.value = np.delete(self.value, -1, 1)

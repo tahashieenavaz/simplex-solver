@@ -7,7 +7,7 @@ def showFractionalIfNeeded(number: str):
     """
     The function `showFractionalIfNeeded` removes the denominator if it is equal to 1 from a given
     fractional number.
-    
+
     :param number: The `showFractionalIfNeeded` function takes a string `number` as input and checks if
     it ends with "/1". If it does, it returns the number without the "/1" suffix; otherwise, it returns
     the original number

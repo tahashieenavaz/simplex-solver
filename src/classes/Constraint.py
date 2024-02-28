@@ -13,3 +13,12 @@ class Constraint:
 
     def row(self):
         return [self.rhb, *self.coeffs]
+
+    def pop(self):
+        self.coeffs.pop()
+
+    def append(self, newSet: list):
+        self.coeffs = self.coeffs + newSet
+
+    def __repr__(self) -> str:
+        return f"{self.rhb} {self.coeffs}"

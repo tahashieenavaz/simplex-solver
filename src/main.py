@@ -18,10 +18,10 @@ def main():
     # problem.solve()
 
     # Two Phase Simplex
-    objective = ObjectiveFunction(Objectives.Min, 1, 0, 1)
+    objective = ObjectiveFunction(Objectives.Min, 1, -2, 0)
     constraints = ConstraintBag()
-    constraints.add(Sign.SmallerEqual, 5, 1, 2, 0)
-    constraints.add(Sign.Equal, 6, 0, 1, 2)
+    constraints.add(Sign.Equal, 1, 2, 1, -3)
+    constraints.add(Sign.Equal, 5, 3, 2, -1)
 
     problem = TwoPhaseSimplexProblem(objective, constraints)
     problem.solve()

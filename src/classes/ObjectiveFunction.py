@@ -32,3 +32,6 @@ class ObjectiveFunction:
         :return: The `variableCount` method is returning the length of the `coeffs` attribute of the object.
         """
         return len(self.coeffs)
+
+    def pop(self):
+        self.coeffs.pop()

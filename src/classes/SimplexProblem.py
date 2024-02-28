@@ -9,8 +9,8 @@ from classes.Collection import Map
 from collections import Counter
 
 from utils.enums import Sign
-from utils.functions import panicIfNot
 
+from utils.functions import panicIfNot
 from utils.functions import fraction
 
 
@@ -33,17 +33,15 @@ class SimplexProblem:
         self.table.beautify(indexlist=self.basis.representation())
 
     def formFirstBase(self) -> None:
-        # TODO: check if the number of basis matches the number of constraints, if not go for two phase
         for index, column in enumerate(self.table.transpose()):
             countedElements = Counter(column)
 
-            checkIfOnlyZeroAndOneExistInColoumn = list(
-                countedElements.keys()) == [0, 1]
+            checkIfOnlyZeroAndOneExistInTheColumn = list(
+                countedElements.keys()).sort() == [0, 1].sort()
             checkIfNumberOfOnesIsOne = countedElements[1] == 1
             checkIfNumberOfZerosMatch = countedElements[0] == self.table.rows(
             ) - 1
-
-            if checkIfOnlyZeroAndOneExistInColoumn and checkIfNumberOfOnesIsOne and checkIfNumberOfZerosMatch:
+            if checkIfOnlyZeroAndOneExistInTheColumn and checkIfNumberOfOnesIsOne and checkIfNumberOfZerosMatch:
                 self.basis.add(index)
 
     def baseTable(self) -> None:

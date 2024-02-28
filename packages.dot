@@ -1,0 +1,35 @@
+digraph "packages" {
+rankdir=BT
+charset="utf-8"
+"src" [color="black", label=<src>, shape="box", style="solid"];
+"src.classes" [color="black", label=<src.classes>, shape="box", style="solid"];
+"src.classes.Basis" [color="black", label=<src.classes.Basis>, shape="box", style="solid"];
+"src.classes.Collection" [color="black", label=<src.classes.Collection>, shape="box", style="solid"];
+"src.classes.Constraint" [color="black", label=<src.classes.Constraint>, shape="box", style="solid"];
+"src.classes.ConstraintBag" [color="black", label=<src.classes.ConstraintBag>, shape="box", style="solid"];
+"src.classes.GomoryCutProblem" [color="black", label=<src.classes.GomoryCutProblem>, shape="box", style="solid"];
+"src.classes.ObjectiveFunction" [color="black", label=<src.classes.ObjectiveFunction>, shape="box", style="solid"];
+"src.classes.PivotElement" [color="black", label=<src.classes.PivotElement>, shape="box", style="solid"];
+"src.classes.SimplexAnswer" [color="black", label=<src.classes.SimplexAnswer>, shape="box", style="solid"];
+"src.classes.SimplexProblem" [color="black", label=<src.classes.SimplexProblem>, shape="box", style="solid"];
+"src.classes.Table" [color="black", label=<src.classes.Table>, shape="box", style="solid"];
+"src.classes.TwoPhaseSimplexProblem" [color="black", label=<src.classes.TwoPhaseSimplexProblem>, shape="box", style="solid"];
+"src.errors" [color="black", label=<src.errors>, shape="box", style="solid"];
+"src.errors.InvalidCoefficientCountException" [color="black", label=<src.errors.InvalidCoefficientCountException>, shape="box", style="solid"];
+"src.errors.InvalidTableDimensionException" [color="black", label=<src.errors.InvalidTableDimensionException>, shape="box", style="solid"];
+"src.errors.NoAnswerException" [color="black", label=<src.errors.NoAnswerException>, shape="box", style="solid"];
+"src.errors.NoBaseCalculatedException" [color="black", label=<src.errors.NoBaseCalculatedException>, shape="box", style="solid"];
+"src.errors.WrongSimplexAnswerPassed" [color="black", label=<src.errors.WrongSimplexAnswerPassed>, shape="box", style="solid"];
+"src.main" [color="black", label=<src.main>, shape="box", style="solid"];
+"src.sanitizers" [color="black", label=<src.sanitizers>, shape="box", style="solid"];
+"src.sanitizers.CoefficientCountSanitizer" [color="black", label=<src.sanitizers.CoefficientCountSanitizer>, shape="box", style="solid"];
+"src.sanitizers.Sanitizer" [color="black", label=<src.sanitizers.Sanitizer>, shape="box", style="solid"];
+"src.utils" [color="black", label=<src.utils>, shape="box", style="solid"];
+"src.utils.enums" [color="black", label=<src.utils.enums>, shape="box", style="solid"];
+"src.utils.functions" [color="black", label=<src.utils.functions>, shape="box", style="solid"];
+"src.main" -> "src.classes.ConstraintBag" [arrowhead="open", arrowtail="none"];
+"src.main" -> "src.classes.ObjectiveFunction" [arrowhead="open", arrowtail="none"];
+"src.main" -> "src.classes.SimplexProblem" [arrowhead="open", arrowtail="none"];
+"src.main" -> "src.classes.TwoPhaseSimplexProblem" [arrowhead="open", arrowtail="none"];
+"src.main" -> "src.utils.enums" [arrowhead="open", arrowtail="none"];
+}

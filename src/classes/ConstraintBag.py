@@ -14,6 +14,10 @@ class ConstraintBag:
     def add(self, sign: Sign, rhb: float, *args):
         self.bag.append(Constraint(sign, rhb, args))
 
+    def popEach(self):
+        for constraint in self.bag:
+            constraint.pop()
+
     def table(self) -> Table:
         finalTable = []
         for constraint in self.bag:
