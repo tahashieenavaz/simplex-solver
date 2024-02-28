@@ -53,7 +53,7 @@ class SimplexProblem:
 
         if self.objective.isMax():
             objective_function_coefficients = Map(
-                self.objective.coeffs).using(lambda x: fraction(-x)).get()
+                self.objective.coeffs).using(lambda x: fraction(-x))
         else:
             objective_function_coefficients = self.objective.coeffs
 

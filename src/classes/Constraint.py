@@ -9,4 +9,4 @@ class Constraint:
     def __init__(self, sign: Sign, rhb: float, coeffs: list):
         self.sign = sign
         self.rhb = fraction(rhb)
-        self.coeffs = Map(coeffs).using(fraction).get()
+        self.coeffs = Map(coeffs).using(fraction)

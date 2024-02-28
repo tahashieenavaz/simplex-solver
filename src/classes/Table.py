@@ -141,7 +141,7 @@ class Table:
 
         print(tabulate(
             np.vectorize(lambda x: showFractionalIfNeeded("/".join(Map(
-                x.as_integer_ratio()).using(str).get())))(self.value),
+                x.as_integer_ratio()).using(str))))(self.value),
             tablefmt="fancy_grid",
             showindex=indexlist,
             headers=header_generator(self.cols())

@@ -8,7 +8,7 @@ from utils.functions import fraction
 class ObjectiveFunction:
     def __init__(self, objective: Objectives, *args) -> None:
         self.objective = objective
-        self.coeffs = Map(args).using(fraction).get()
+        self.coeffs = Map(args).using(fraction)
 
     def isMax(self):
         """

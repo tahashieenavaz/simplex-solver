@@ -23,7 +23,7 @@ class Basis:
         :return: A list of elements obtained by applying the `subscript` function to each element in the
         `self.base` list.
         """
-        return Map(self.variables).using(subscript).get()
+        return Map(self.variables).using(subscript)
 
     def swap(self, leaving: int, entering: int) -> None:
         """
