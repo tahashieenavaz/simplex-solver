@@ -118,11 +118,17 @@ class SimplexProblem:
                 pivot.setRow(index, theta, element)
 
             panicIfNot(pivot.isValid())
+            
+            self.beautify()
 
             self.basis.swap(
                 self.basis.variables[pivot.row],
                 pivot.col
             )
+
+            self.beautify()
+            break
+
 
             # DO Linear Operations
 

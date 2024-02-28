@@ -16,8 +16,6 @@ def main():
     problem = SimplexProblem(objective, constraints)
     problem.solve()
 
-    problem.beautify()
-
 
 if __name__ == "__main__":
     main()
