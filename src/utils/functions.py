@@ -2,6 +2,15 @@ import importlib
 from sanitizers.Sanitizer import Sanitizer
 from fractions import Fraction
 
+from utils.settings import Settings
+
+
+def env(key) -> None | str:
+    if key in Settings:
+        return Settings[key]
+
+    return None
+
 
 def showFractionalIfNeeded(number: str):
     """

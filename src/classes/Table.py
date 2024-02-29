@@ -5,6 +5,7 @@ from classes.Collection import Map
 
 from errors.InvalidTableDimensionException import InvalidTableDimensionException
 from utils.functions import header_generator
+from utils.functions import env
 from utils.functions import showFractionalIfNeeded
 
 
@@ -136,7 +137,10 @@ class Table:
 
             self.value = np.insert(self.value, index, new, axis=1)
 
-    def beautify(self, indexlist=[], delimiter="\t"):
+    def beautify(self, indexlist=[], delimiter="\t") -> None:
+        if not env("PRINT_TABLES"):
+            return None
+
         indexlist.insert(0, "-z")
 
         print(tabulate(
