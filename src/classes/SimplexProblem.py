@@ -4,6 +4,7 @@ from classes.PivotElement import PivotElement
 from classes.Basis import Basis
 from classes.Table import Table
 from classes.SimplexAnswer import SimplexAnswer
+from classes.DualSimplexPivotElement import DualSimplexPivotElement
 from classes.Collection import Map
 
 from collections import Counter
@@ -100,11 +101,18 @@ class SimplexProblem:
 
             self.table.add_col(new_column)
 
+    def isDual(self):
+        return "dualsimplexproblem" in str(type(self)).lower()
+
     def solve(self) -> None:
         self.beautify()
 
         while self.isNotOptimal():
-            pivot = PivotElement()
+            if self.isDual():
+                pivot = DualSimplexPivotElement()
+            else:
+                pivot = PivotElement()
+
             for i in range(1, self.table.cols()):
                 if self.table.row(0)[i] < 0:
                     pivot.setCol(i)

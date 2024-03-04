@@ -1,7 +1,7 @@
 class PivotElement:
     def __init__(self) -> None:
-        self.row = -1
-        self.col = -1
+        self.row: int = -1
+        self.col: int = -1
         self.lastTheta = None
         self.value = None
 
